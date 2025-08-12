@@ -54,7 +54,5 @@ A sophisticated multi-timeframe stochastic oscillator that combines four differe
 - **Tools:** yt-dlp, ffmpeg, TradingView, Claude.ai
 - **Focus Areas:** Automation, Financial Analysis, Media Processing
 
-## 📞 Contact
-Feel free to reach out for questions about any of these projects or potential collaborations.
-
-*This repository demonstrates practical problem-solving through code, focusing on real-world applications and workflow improvements.*
+## Contact
+Feel free to reach out for questions about any of these projects or potential collaborations @ rmendoza5418@gmail.com

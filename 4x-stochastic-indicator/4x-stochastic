@@ -1,0 +1,49 @@
+//@version=6
+indicator("4x Stochastic Scalping", overlay=false)
+
+// Inputs for the four Stochastics Fast indicators
+kLength1 = input.int(9, title="K Length 1", minval=1)
+dSmoothing1 = input.int(3, title="D Smoothing 1", minval=1)
+
+kLength2 = input.int(14, title="K Length 2", minval=1)
+dSmoothing2 = input.int(3, title="D Smoothing 2", minval=1)
+
+kLength3 = input.int(40, title="K Length 3", minval=1)
+dSmoothing3 = input.int(4, title="D Smoothing 3", minval=1)
+
+kLength4 = 60
+dSmoothing4 = 10
+
+overbought = input.int(80, title="Overbought Level", minval=1, maxval=100)
+oversold = input.int(20, title="Oversold Level", minval=1, maxval=100)
+
+// Calculations for each Stochastics Fast
+k1 = ta.stoch(close, high, low, kLength1)
+d1 = ta.sma(k1, dSmoothing1)
+
+k2 = ta.stoch(close, high, low, kLength2)
+d2 = ta.sma(k2, dSmoothing2)
+
+k3 = ta.stoch(close, high, low, kLength3)
+d3 = ta.sma(k3, dSmoothing3)
+
+k4 = ta.stoch(close, high, low, kLength4)
+d4 = ta.sma(k4, dSmoothing4)
+
+// Plot Stochastics
+plot(d1, title="D1 (Fast)", color=color.red, linewidth=1)
+plot(d2, title="D2 (Medium)", color=color.green, linewidth=1)
+plot(d3, title="D3 (Slow)", color=color.teal, linewidth=1)
+plot(d4, title="D4 (Very Slow)", color=color.rgb(255, 0, 255), linewidth=1) // Magenta using RGB
+
+// Highlight overbought and oversold zones
+hline(overbought, "Overbought", color=color.gray, linestyle=hline.style_solid, linewidth=1)
+hline(oversold, "Oversold", color=color.gray, linestyle=hline.style_solid, linewidth=1)
+hline(50, "Midline", color=color.gray, linestyle=hline.style_dotted, linewidth=1)
+
+// Add shaded region between oversold and overbought
+fill(hline(overbought), hline(oversold), color=color.new(color.blue, 90), title="Neutral Zone Fill")
+
+// Overbought and oversold shading
+bgcolor(d1 > overbought and d2 > overbought and d3 > overbought and d4 > overbought ? color.new(color.red, 90) : na, title="Overbought Shading")
+bgcolor(d1 < oversold and d2 < oversold and d3 < oversold and d4 < oversold ? color.new(color.green, 90) : na, title="Oversold Shading")
